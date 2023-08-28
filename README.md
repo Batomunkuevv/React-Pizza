@@ -1,1 +1,1 @@
-<h1>React App template by Kirill Batomunkuev</h1>
+<h1>React Pizza — Cамая вкусная пицца во вселенной 🍕</h1>
