@@ -1,0 +1,31 @@
+.cart-empty {
+    margin: 160px 0;
+
+    &__body {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 547px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    &__title-icon {
+    }
+
+    &__text {
+        margin-bottom: 48px;
+    }
+
+    &__image {
+        margin-bottom: 72px;
+    }
+}

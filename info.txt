@@ -1,1 +1,0 @@
-https://64eea69d219b3e2873c35f64.mockapi.io/api/react-pizza/pizzas

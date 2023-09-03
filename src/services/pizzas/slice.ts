@@ -29,13 +29,13 @@ const pizzasSlice = createSlice({
     name: "pizzas",
     initialState: initialStore,
     reducers: {
-        setSort(store, action) {
+        setSort: (store, action) => {
             store.sort = action.payload;
         },
-        setSortDirection(store) {
+        setSortDirection: (store) => {
             store.sortDirection = store.sortDirection === "ASC" ? "DESC" : "ASC";
         },
-        setCategory(store, action) {
+        setCategory: (store, action) => {
             store.category = action.payload;
         },
     },

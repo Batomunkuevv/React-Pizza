@@ -49,7 +49,7 @@ export const PizzaCatalog = () => {
     const currentCategoryName = categories[category];
 
     return (
-        <section className="pizza-catalog">
+        <section className={styles['pizza-catalog']}>
             <div className="container">
                 <div className={styles["pizza-catalog__top"]}>
                     <Categories />

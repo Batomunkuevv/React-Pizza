@@ -21,7 +21,7 @@ export const Categories = () => {
     return (
         <ul className={styles["pizza-categories"]}>
             {categories.map((category, i) => (
-                <li className="pizza-catalog__category">
+                <li key={i} className="pizza-catalog__category">
                     <button
                         data-category={i}
                         onClick={handleCategoryBtnClick}

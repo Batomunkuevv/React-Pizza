@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "./cart-btn.module.scss";
+import { getCartPizzasS, getCartPriceS } from "../../services/cart";
+
+import { Link } from "react-router-dom";
 
 export const CartBtn = () => {
+    const cartPizzas = useSelector(getCartPizzasS);
+    const cartPice = useSelector(getCartPriceS);
+
     return (
         <Link to="/cart" className={styles["cart-btn"]}>
-            <span className={styles["cart-btn__price"]}>520 ₽</span>
+            <span className={styles["cart-btn__price"]}>{cartPice} ₽</span>
             <span className={styles["cart-btn__count"]}>
                 <div className="cart-btn__icon">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +37,7 @@ export const CartBtn = () => {
                         />
                     </svg>
                 </div>
-                3
+                {cartPizzas.length}
             </span>
         </Link>
     );

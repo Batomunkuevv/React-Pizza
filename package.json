@@ -47,6 +47,8 @@
   "devDependencies": {
     "classnames": "^2.3.2",
     "css-modules": "^0.3.0",
+    "gh-pages": "^6.0.0",
+    "reselect": "^4.1.8",
     "sass": "^1.66.1"
   }
 }

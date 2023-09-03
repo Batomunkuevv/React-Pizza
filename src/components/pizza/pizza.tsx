@@ -1,9 +1,63 @@
-import { FC } from "react";
+import { FC, useState, MouseEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./pizza.module.scss";
 
 import { TPizza } from "../../types";
+import classNames from "classnames";
+import { addPizza, getCartPizzasS, increasePizza } from "../../services/cart";
 
-export const Pizza: FC<TPizza> = ({ imageUrl, title, sizes, types, price }) => {
+export const Pizza: FC<TPizza> = ({ id, imageUrl, title, sizes, types, price }) => {
+    const dispatch = useDispatch();
+
+    const [pizzaSize, setPizzaSize] = useState<number | null>(null);
+    const [pizzaType, setPizzaType] = useState<string | null>(null);
+    const cartPizzas = useSelector(getCartPizzasS);
+    const count = cartPizzas.find((pizza) => {
+        return pizza.id === id && pizza.size === pizzaSize && pizzaType === pizza.type;
+    })?.count;
+
+    const handleSize = (e: MouseEvent<HTMLButtonElement>) => {
+        const { currentTarget } = e;
+        const currentTargetSize = currentTarget.dataset.size;
+
+        if (currentTargetSize) setPizzaSize(+currentTargetSize);
+    };
+
+    const handleType = (e: MouseEvent<HTMLButtonElement>) => {
+        const { currentTarget } = e;
+        const currentTargetType = currentTarget.dataset.type;
+
+        if (currentTargetType) setPizzaType(currentTargetType);
+    };
+
+    const handleAddPizza = () => {
+        const pizzaInCartIndex = cartPizzas.findIndex((pizza) => pizza.id === id && pizza.size === pizzaSize && pizza.type === pizzaType);
+
+        if (pizzaInCartIndex === -1) {
+            const payload = {
+                id,
+                title,
+                image: imageUrl,
+                size: pizzaSize,
+                type: pizzaType,
+                price,
+                count: 1,
+            };
+
+            dispatch(addPizza(payload));
+        } else {
+            dispatch(increasePizza(pizzaInCartIndex));
+        }
+    };
+
+    const setTypeSelectorClasses = (type: "тонкое" | "традиционное") => {
+        return [styles["pizza__selector-btn"], { [styles["is-active"]]: type === pizzaType }];
+    };
+
+    const setSizeSelectorClasses = (size: number) => {
+        return [styles["pizza__selector-btn"], { [styles["is-active"]]: size === pizzaSize }];
+    };
+
     return (
         <article className="pizza">
             <figure className={styles["pizza__image"]}>
@@ -13,27 +67,37 @@ export const Pizza: FC<TPizza> = ({ imageUrl, title, sizes, types, price }) => {
             <div className={styles["pizza__characteristics"]}>
                 <ul className={styles["pizza__types"]}>
                     <li className="pizza__selector">
-                        <button disabled={!types.includes(0)} className={styles["pizza__selector-btn"]}>тонкое</button>
+                        <button onClick={handleType} data-type={"тонкое"} disabled={!types.includes(0)} className={classNames(setTypeSelectorClasses("тонкое"))}>
+                            тонкое
+                        </button>
                     </li>
                     <li className="pizza__selector">
-                        <button disabled={!types.includes(1)} className={styles["pizza__selector-btn"]}>традиционное</button>
+                        <button onClick={handleType} data-type={"традиционное"} disabled={!types.includes(1)} className={classNames(setTypeSelectorClasses("традиционное"))}>
+                            традиционное
+                        </button>
                     </li>
                 </ul>
                 <ul className={styles["pizza__sizes"]}>
                     <li className="pizza__selector">
-                        <button disabled={!sizes.includes(26)} className={styles["pizza__selector-btn"]}>26 см.</button>
+                        <button onClick={handleSize} data-size={26} disabled={!sizes.includes(26)} className={classNames(setSizeSelectorClasses(26))}>
+                            26 см.
+                        </button>
                     </li>
                     <li className="pizza__selector">
-                        <button disabled={!sizes.includes(30)} className={styles["pizza__selector-btn"]}>30 см.</button>
+                        <button onClick={handleSize} data-size={30} disabled={!sizes.includes(30)} className={classNames(setSizeSelectorClasses(30))}>
+                            30 см.
+                        </button>
                     </li>
                     <li className="pizza__selector">
-                        <button disabled={!sizes.includes(40)} className={styles["pizza__selector-btn"]}>40 см.</button>
+                        <button onClick={handleSize} data-size={40} disabled={!sizes.includes(40)} className={classNames(setSizeSelectorClasses(40))}>
+                            40 см.
+                        </button>
                     </li>
                 </ul>
             </div>
-            <div className={styles['pizza__bottom']}>
+            <div className={styles["pizza__bottom"]}>
                 <div className={styles["pizza__price"]}>от {price} ₽</div>
-                <button className={styles["pizza__btn"]}>
+                <button disabled={pizzaSize === null || pizzaType === null} onClick={handleAddPizza} className={styles["pizza__btn"]}>
                     <span className={styles["pizza__btn-plus"]}>
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -43,7 +107,7 @@ export const Pizza: FC<TPizza> = ({ imageUrl, title, sizes, types, price }) => {
                         </svg>
                     </span>
                     <span className="pizza__btn-text">Добавить </span>
-                    {/* <span className={styles["pizza__btn-count"]}>2</span> */}
+                    {count && <span className={styles["pizza__btn-count"]}>{count}</span>}
                 </button>
             </div>
         </article>

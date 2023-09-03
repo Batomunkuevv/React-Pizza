@@ -1,4 +1,4 @@
-import { PizzaCatalog } from "../components/pizza-catalog";
+import { PizzaCatalog } from "../../components/pizza-catalog";
 
 export const MainPage = () => {
     return (
