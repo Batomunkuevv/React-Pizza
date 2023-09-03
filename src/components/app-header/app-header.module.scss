@@ -1,0 +1,12 @@
+.app-header {
+    padding: 40px 0;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.app-header__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}

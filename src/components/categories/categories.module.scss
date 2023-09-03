@@ -1,0 +1,32 @@
+.pizza-categories {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__category {
+    }
+
+    &__btn {
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2b2525;
+        font-weight: 700;
+        letter-spacing: 0.24px;
+        border-radius: 30px;
+        background: #f9f9f9;
+        border: 1px solid transparent;
+        transition: all 0.3s ease-in-out 0s;
+
+        &:hover {
+            border-color: #282828;
+        }
+
+        &.is-active-category {
+            color: #fff;
+            background: #282828;
+        }
+    }
+}
