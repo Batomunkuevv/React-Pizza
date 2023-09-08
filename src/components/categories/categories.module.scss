@@ -4,7 +4,22 @@
     flex-wrap: wrap;
     gap: 8px;
 
+    @media (max-width: 992px) {
+        padding-right: 16px;
+        max-width: 100%;
+        flex-wrap: nowrap;
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+
     &__category {
+        @media (max-width: 992px) {
+            white-space: nowrap;
+        }
     }
 
     &__btn {

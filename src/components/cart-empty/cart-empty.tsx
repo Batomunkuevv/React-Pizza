@@ -17,7 +17,7 @@ export const CartEmpty = () => {
                             <img src={smileImage} alt="Smile" title="Smile" />
                         </span>
                     </h2>
-                    <p className={styles['cart-empty__text']}>Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы заказать пиццу, перейди на главную страницу.</p>
+                    <p className={styles['cart-empty__text']}>Вероятнее всего, вы ещё не заказывали  пиццу. Для того, чтобы заказать, перейдите на главную страницу.</p>
                     <div className={styles['cart-empty__image']}>
                         <img src={cartIllustration} alt="Cart Illustration" title="Cart Illustration" />
                     </div>

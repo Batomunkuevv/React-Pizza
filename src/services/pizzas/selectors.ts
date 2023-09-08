@@ -6,3 +6,4 @@ export const getPizzasRequestFailedS = (store: TStore) => store.pizzas.pizzasReq
 export const getSortS = (store: TStore) => store.pizzas.sort;
 export const getSortDirectionS = (store: TStore) => store.pizzas.sortDirection;
 export const getCategoryS = (store: TStore) => store.pizzas.category;
+export const getSearchS = (store: TStore) => store.pizzas.search;

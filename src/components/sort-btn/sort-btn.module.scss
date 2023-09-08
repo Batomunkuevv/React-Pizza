@@ -34,6 +34,7 @@
 
     &__type-list {
         position: absolute;
+        z-index: 100;
         top: calc(100% + 8px);
         right: 0;
         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.09);
@@ -56,11 +57,11 @@
         &.is-active-sort {
             font-weight: 700;
             color: #fe5f1e;
-            background: rgba(254, 95, 30, 0.05);
+            background: #fff7f4;
         }
 
         &:hover {
-            background: rgba(254, 95, 30, 0.05);
+            background: #fff7f4;
         }
     }
 }

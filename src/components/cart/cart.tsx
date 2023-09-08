@@ -63,7 +63,7 @@ export const Cart = () => {
                         <span className={styles['cart__back-icon']}></span>
                         Вернуться назад
                     </Link>
-                    <button className="cart__send btn">Оплатить сейчас</button>
+                    <button className={classNames(styles['cart__send'], 'btn')}>Оплатить сейчас</button>
                 </footer>
             </div>
         </section>

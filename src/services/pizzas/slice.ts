@@ -10,6 +10,7 @@ type TInitialStore = {
     sort: TSort;
     sortDirection: "ASC" | "DESC";
     category: number;
+    search: string;
 };
 
 const initialStore: TInitialStore = {
@@ -19,6 +20,7 @@ const initialStore: TInitialStore = {
     sort: "popular",
     sortDirection: "ASC",
     category: 0,
+    search: "",
 };
 
 export const getPizzasRequest = createAsyncThunk("PIZZAS/GET_REQUEST", () => {
@@ -38,6 +40,10 @@ const pizzasSlice = createSlice({
         setCategory: (store, action) => {
             store.category = action.payload;
         },
+        setSearch: (store, action) => {
+            console.log(action.payload);
+            store.search = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getPizzasRequest.pending, (store) => {
@@ -56,5 +62,5 @@ const pizzasSlice = createSlice({
     },
 });
 
-export const { setSort, setSortDirection, setCategory } = pizzasSlice.actions;
+export const { setSort, setSortDirection, setCategory, setSearch } = pizzasSlice.actions;
 export const pizzasReducer = pizzasSlice.reducer;

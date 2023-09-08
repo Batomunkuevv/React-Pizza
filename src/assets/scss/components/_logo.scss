@@ -1,0 +1,17 @@
+.logo{
+    @media(max-width: 576px){
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fe5f1e;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
+
+    @media(max-width: 400px){
+        width: 48px;
+        height: 48px;
+    }
+}

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./pizza-catalog.module.scss";
 import { categories } from "../../mock";
-import { getPizzasS, getPizzasRequest, getPizzasRequestS, getPizzasRequestFailedS, getSortS, getSortDirectionS, getCategoryS } from "../../services/pizzas";
+import { getPizzasS, getPizzasRequest, getPizzasRequestS, getPizzasRequestFailedS, getSortS, getSortDirectionS, getCategoryS, getSearchS } from "../../services/pizzas";
 
-import { Pizza } from "../pizza/pizza";
+import { Pizza, PizzaSkeleton } from "../pizza";
 import { SortBtn } from "../sort-btn";
 import { Categories } from "../categories";
 
@@ -19,7 +19,8 @@ export const PizzaCatalog = () => {
     const sort = useSelector(getSortS);
     const sortDirection = useSelector(getSortDirectionS);
     const category = useSelector(getCategoryS);
-
+    const search = useSelector(getSearchS).toLowerCase();
+    
     useEffect(() => {
         dispatch(getPizzasRequest() as any);
     }, [dispatch]);
@@ -49,27 +50,36 @@ export const PizzaCatalog = () => {
     const currentCategoryName = categories[category];
 
     return (
-        <section className={styles['pizza-catalog']}>
+        <section className={styles["pizza-catalog"]}>
             <div className="container">
                 <div className={styles["pizza-catalog__top"]}>
                     <Categories />
                     <SortBtn />
                 </div>
                 <h2 className="pizza-catalog__title">{currentCategoryName} пиццы</h2>
-                {isPizzasRequest ? (
-                    <div>Загрузка...</div>
-                ) : isPizzasRequestFailed ? (
+                {isPizzasRequestFailed ? (
                     <div>Произошла ошибка</div>
                 ) : (
                     <ul className={styles["pizza-catalog__list"]}>
-                        {[...pizzas]
-                            .sort(sortPizzas)
-                            .filter((pizza) => (category === 0 ? pizza : +category === pizza.category))
-                            .map((pizza) => (
-                                <li key={pizza.id} className="pizza-catalog__item">
-                                    <Pizza {...pizza} />
-                                </li>
-                            ))}
+                        {isPizzasRequest ? (
+                            <>
+                                {[...new Array(8)].map((item, i) => (
+                                    <PizzaSkeleton key={i}/>
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                                {[...pizzas]
+                                    .sort(sortPizzas)
+                                    .filter((pizza) => pizza.title.toLowerCase().includes(search))
+                                    .filter(pizza => category === 0 ? pizza : pizza.category === category)
+                                    .map((pizza) => (
+                                        <li key={pizza.id} className="pizza-catalog__item">
+                                            <Pizza {...pizza} />
+                                        </li>
+                                    ))}
+                            </>
+                        )}
                     </ul>
                 )}
             </div>

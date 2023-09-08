@@ -1,0 +1,31 @@
+.search {
+    position: relative;
+    width: 288px;
+
+    @media(max-width: 992px){
+        width: 100%;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translate(0, -50%);
+        color: #c4c4c4;
+    }
+
+    &__clear {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translate(0, -50%);
+        background: unset;
+        font-size: 10px;
+        transition: all 0.3s ease-in-out 0s;
+
+        &:not(.is-active){
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
