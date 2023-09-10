@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TCartPizza } from "../../types";
 
 type TInitialStore = {
@@ -16,16 +16,16 @@ const cartSlice = createSlice({
         addPizza: (store, action: { type: string; payload: TCartPizza }) => {
             store.cartPizzas.push(action.payload);
         },
-        removePizza: (store, action) => {
+        removePizza: (store, action: PayloadAction<TCartPizza[]>) => {
             store.cartPizzas = action.payload;
         },
         clearCart: (store) => {
             store.cartPizzas = initialStore.cartPizzas;
         },
-        increasePizza: (store, action) => {
+        increasePizza: (store, action: PayloadAction<number>) => {
             store.cartPizzas[action.payload].count += 1;
         },
-        decreasePizza: (store, action) => {
+        decreasePizza: (store, action: PayloadAction<number>) => {
             store.cartPizzas[action.payload].count -= 1;
         },
     },

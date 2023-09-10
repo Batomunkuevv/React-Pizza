@@ -1,12 +1,13 @@
-import { useSelector } from "react-redux";
+import { FC } from "react";
+import { useAppSelector } from "../../hooks";
 import styles from "./cart-btn.module.scss";
 import { getCartPizzasS, getCartPriceS } from "../../services/cart";
 
 import { Link } from "react-router-dom";
 
-export const CartBtn = () => {
-    const cartPizzas = useSelector(getCartPizzasS);
-    const cartPice = useSelector(getCartPriceS);
+export const CartBtn: FC = () => {
+    const cartPizzas = useAppSelector(getCartPizzasS);
+    const cartPice = useAppSelector(getCartPriceS);
 
     return (
         <Link to="/cart" className={styles["cart-btn"]}>

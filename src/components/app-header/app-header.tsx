@@ -1,14 +1,15 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useMatch } from "react-router";
 import styles from "./app-header.module.scss";
+import classNames from "classnames";
 import logo from "../../images/logo.svg";
 import logoMobile from "../../images/logo-mobile.svg";
 
 import { CartBtn } from "../cart-btn";
 import { Search } from "../search";
-import classNames from "classnames";
 
-export const AppHeader = () => {
+export const AppHeader: FC = () => {
     const isCartPage = useMatch("/cart");
 
     return (

@@ -1,17 +1,17 @@
-import { useRef, useState, MouseEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState, MouseEvent, FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import classNames from "classnames";
 import styles from "./sort-btn.module.scss";
 import { getSortDirectionS, getSortS, setSort, setSortDirection } from "../../services/pizzas";
 
-export const SortBtn = () => {
-    const dispatch = useDispatch();
+export const SortBtn: FC = () => {
+    const dispatch = useAppDispatch();
 
     const sortBtn = useRef<HTMLButtonElement>(null);
     const sortBtnIcon = useRef<HTMLButtonElement>(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    const currentSort = useSelector(getSortS);
-    const currentSortDirection = useSelector(getSortDirectionS);
+    const currentSort = useAppSelector(getSortS);
+    const currentSortDirection = useAppSelector(getSortDirectionS);
 
     const handleTypeBtnClick = () => {
         setShowDropdown(!showDropdown);

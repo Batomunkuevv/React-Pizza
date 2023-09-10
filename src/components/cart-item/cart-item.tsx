@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./cart-item.module.scss";
 
 import { TCartPizza } from "../../types";
 import { removePizza, increasePizza, decreasePizza, getCartPizzasS } from "../../services/cart";
 
 export const CartItem: FC<TCartPizza> = ({ image, title, price, type, size, id, count }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const cartPizzas = useSelector(getCartPizzasS);
+    const cartPizzas = useAppSelector(getCartPizzasS);
     const cartPizzaIndex = cartPizzas.findIndex((pizza) => pizza.id === id && pizza.size === size && pizza.type === type);
     const filterCartPizzas = cartPizzas.filter((pizza) => {
         return pizza.id !== id ? true : pizza.size !== size || pizza.type !== type;

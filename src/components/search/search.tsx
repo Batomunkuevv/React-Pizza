@@ -1,5 +1,5 @@
 import { FC, useState, FormEvent, useCallback, MouseEvent, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks";
 import classNames from "classnames";
 import styles from "./search.module.scss";
 import { setSearch } from "../../services/pizzas";
@@ -8,7 +8,7 @@ import debounce from "lodash.debounce";
 import { TSearch } from "./";
 
 export const Search: FC<TSearch> = ({ extraClass }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
     const [value, setValue] = useState("");
 

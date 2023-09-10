@@ -1,24 +1,25 @@
+import { FC } from "react";
 import classNames from "classnames";
 import styles from "./cart.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { clearCart, getCartPizzasS, getCartPriceS } from "../../services/cart";
 import cartImage from "../../images/cart.svg";
 
 import { Link } from "react-router-dom";
 import { CartItem } from "../cart-item/cart-item";
 
-export const Cart = () => {
-    const dispatch = useDispatch();
+export const Cart: FC = () => {
+    const dispatch = useAppDispatch();
 
-    const cartPizzas = useSelector(getCartPizzasS);
-    const cartPrice = useSelector(getCartPriceS);
+    const cartPizzas = useAppSelector(getCartPizzasS);
+    const cartPrice = useAppSelector(getCartPriceS);
 
     const handleClearCart = () => {
         dispatch(clearCart());
-    }
+    };
 
     return (
-        <section className={styles['cart']}>
+        <section className={styles["cart"]}>
             <div className={classNames(styles["cart__container"], "container")}>
                 <header className={styles["cart__header"]}>
                     <h1 className={styles["cart__title"]}>
@@ -50,20 +51,20 @@ export const Cart = () => {
                         <CartItem key={i} {...pizza}></CartItem>
                     ))}
                 </ul>
-                <div className={styles['cart__info']}>
-                    <div className={styles['cart__count']}>
+                <div className={styles["cart__info"]}>
+                    <div className={styles["cart__count"]}>
                         Всего пицц: <b>{cartPizzas.length} шт.</b>
                     </div>
-                    <div className={styles['cart__price']}>
-                        Сумма заказа: <span className={styles['cart__price-value']}>{cartPrice} ₽</span>
+                    <div className={styles["cart__price"]}>
+                        Сумма заказа: <span className={styles["cart__price-value"]}>{cartPrice} ₽</span>
                     </div>
                 </div>
-                <footer className={styles['cart__bottom']}>
-                    <Link to="/" className={classNames(styles['cart__back'], 'btn', 'btn--gray')}>
-                        <span className={styles['cart__back-icon']}></span>
+                <footer className={styles["cart__bottom"]}>
+                    <Link to="/" className={classNames(styles["cart__back"], "btn", "btn--gray")}>
+                        <span className={styles["cart__back-icon"]}></span>
                         Вернуться назад
                     </Link>
-                    <button className={classNames(styles['cart__send'], 'btn')}>Оплатить сейчас</button>
+                    <button className={classNames(styles["cart__send"], "btn")}>Оплатить сейчас</button>
                 </footer>
             </div>
         </section>

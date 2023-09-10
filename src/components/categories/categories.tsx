@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { categories } from "../../mock";
-import { MouseEvent } from "react";
+import { FC, MouseEvent } from "react";
 import { setCategory, getCategoryS } from "../../services/pizzas";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./categories.module.scss";
 
-export const Categories = () => {
-    const dispatch = useDispatch();
-    const currentCategory = useSelector(getCategoryS);
+export const Categories: FC = () => {
+    const dispatch = useAppDispatch();
+    const currentCategory = useAppSelector(getCategoryS);
 
     const handleCategoryBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
         const { currentTarget } = e;

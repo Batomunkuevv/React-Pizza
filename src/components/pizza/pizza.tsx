@@ -1,5 +1,5 @@
 import { FC, useState, MouseEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./pizza.module.scss";
 
 import { TPizza } from "../../types";
@@ -7,11 +7,11 @@ import classNames from "classnames";
 import { addPizza, getCartPizzasS, increasePizza } from "../../services/cart";
 
 export const Pizza: FC<TPizza> = ({ id, imageUrl, title, sizes, types, price }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [pizzaSize, setPizzaSize] = useState<number | null>(null);
     const [pizzaType, setPizzaType] = useState<string | null>(null);
-    const cartPizzas = useSelector(getCartPizzasS);
+    const cartPizzas = useAppSelector(getCartPizzasS);
     const count = cartPizzas.find((pizza) => {
         return pizza.id === id && pizza.size === pizzaSize && pizzaType === pizza.type;
     })?.count;

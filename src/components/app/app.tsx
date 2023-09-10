@@ -1,8 +1,9 @@
+import { FC } from "react";
 import { Pages } from "../../pages";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "../layout";
 
-export const App = () => {
+export const App: FC = () => {
     return (
         <Router>
             <Routes>

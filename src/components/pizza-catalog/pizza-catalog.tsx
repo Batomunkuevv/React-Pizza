@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./pizza-catalog.module.scss";
 import { categories } from "../../mock";
 import { getPizzasS, getPizzasRequest, getPizzasRequestS, getPizzasRequestFailedS, getSortS, getSortDirectionS, getCategoryS, getSearchS } from "../../services/pizzas";
@@ -10,16 +10,16 @@ import { Categories } from "../categories";
 
 import { TPizza } from "../../types";
 
-export const PizzaCatalog = () => {
-    const dispatch = useDispatch();
+export const PizzaCatalog: FC = () => {
+    const dispatch = useAppDispatch();
 
-    const pizzas: TPizza[] = useSelector(getPizzasS);
-    const isPizzasRequest = useSelector(getPizzasRequestS);
-    const isPizzasRequestFailed = useSelector(getPizzasRequestFailedS);
-    const sort = useSelector(getSortS);
-    const sortDirection = useSelector(getSortDirectionS);
-    const category = useSelector(getCategoryS);
-    const search = useSelector(getSearchS).toLowerCase();
+    const pizzas: TPizza[] = useAppSelector(getPizzasS);
+    const isPizzasRequest = useAppSelector(getPizzasRequestS);
+    const isPizzasRequestFailed = useAppSelector(getPizzasRequestFailedS);
+    const sort = useAppSelector(getSortS);
+    const sortDirection = useAppSelector(getSortDirectionS);
+    const category = useAppSelector(getCategoryS);
+    const search = useAppSelector(getSearchS).toLowerCase();
     
     useEffect(() => {
         dispatch(getPizzasRequest() as any);
@@ -74,7 +74,7 @@ export const PizzaCatalog = () => {
                                     .filter((pizza) => pizza.title.toLowerCase().includes(search))
                                     .filter(pizza => category === 0 ? pizza : pizza.category === category)
                                     .map((pizza) => (
-                                        <li key={pizza.id} className="pizza-catalog__item">
+                                        <li key={pizza.id} className={styles['pizza-catalog__item']}>
                                             <Pizza {...pizza} />
                                         </li>
                                     ))}

@@ -1,5 +1,5 @@
 import { request } from "../../utils";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { TPizza } from "../../types";
 import { TSort } from "../../types";
 
@@ -31,26 +31,25 @@ const pizzasSlice = createSlice({
     name: "pizzas",
     initialState: initialStore,
     reducers: {
-        setSort: (store, action) => {
+        setSort: (store, action: PayloadAction<TSort>) => {
             store.sort = action.payload;
         },
         setSortDirection: (store) => {
             store.sortDirection = store.sortDirection === "ASC" ? "DESC" : "ASC";
         },
-        setCategory: (store, action) => {
+        setCategory: (store, action: PayloadAction<number>) => {
             store.category = action.payload;
         },
-        setSearch: (store, action) => {
-            console.log(action.payload);
+        setSearch: (store, action: PayloadAction<string>) => {
             store.search = action.payload;
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getPizzasRequest.pending, (store) => {
             store.pizzasRequest = true;
             store.pizzasRequestFailed = false;
         });
-        builder.addCase(getPizzasRequest.fulfilled, (store, action) => {
+        builder.addCase(getPizzasRequest.fulfilled, (store, action: PayloadAction<TPizza[]>) => {
             store.pizzas = action.payload;
             store.pizzasRequest = false;
             store.pizzasRequestFailed = false;
